@@ -55,4 +55,49 @@ def are_words_sorted(words, alpha_order):
     bool
     """
     # Your code here
+    order_dict = {}
 
+    for index, value in enumerate(alpha_order):
+        order_dict[value] = index
+    print(order_dict)
+
+    for i in range(len(words) - 1): #to skip the last word entierly to not go out of range..idk
+        word_1 = words[i]
+        word_2 = words[i + 1]
+        #comare the current word to next
+        # go letter by letter
+        for j in range(min(len(word_1), len(word_2))):
+            letter_1 = word_1[j]
+            letter_2 = word_2[j]
+            if letter_1 == letter_2:
+                continue
+            # index_1 = alpha_order.index(letter_1)
+            # index_2 = alpha_order.index(letter_2)
+            index_1 = order_dict[letter_1]
+            index_2 = order_dict[letter_2]
+
+            if index_1 > index_2:
+                return False
+            else:
+                break
+        else:
+            return False
+    return True
+
+print(are_words_sorted(["lambda","school"], "abcdefghijklmnopqrstuvwxyz"))
+print(are_words_sorted(["were","where","yellow"], "habcdefgijklmnopqrstuvwxyz"))
+print(are_words_sorted(["lambda","lamb"], "abcdefghijklmnopqrstuvwxyz"))
+
+#uper
+# input array of string
+# annd an order also a string
+# output boolean
+#plan:
+# loop over the words 
+# comapre current item to t=next
+# go by letter
+# if l1 < l2 in order continue to next word
+# if l1 == l2 continue - letter
+# if l1 > l2 out of order stop
+# to check if l1 < l2 find index of l1 and index of l2 from order and compare 
+# if first loop ends len(l1) > len(l2) return false 
